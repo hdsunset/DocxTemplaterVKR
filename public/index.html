@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Simple Multer Upload Example</title>
+    <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="./xlsx-populate.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.pager.js"></script>
+   <script type="text/javascript" src="jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdropdownlist.js"></script>
+    
+  </head>
+  <body>
+    <form id="form">
+      <input type="file" id="file-input" />
+      <div id="content"><h3>List of students</h3>
+        <ul id="list"></ul>
+        <ul id="cblist"></ul>
+      </div>
+      <input type="submit" id="sumbit-button" value="Сгенерировать протоколы ВКР"/>
+    </form>
+
+    <div id="grid">
+    </div>
+    <div id="jqxgrid"></div>       
+        
+    </div>
+
+    <script src="bundle.js"></script>
+  </body>
+</html>
