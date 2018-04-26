@@ -1,4 +1,6 @@
 window.IQc = { entity: 'x', ENTITIES: { x: 'x' } } //фикс 
+/////////import 'style.css';
+
 
 function openXlsx(file) {
   return XlsxPopulate.fromDataAsync(file);
@@ -35,7 +37,8 @@ $("#file-input").on('change', (e) => {
         profil: workbook.sheet("students").cell('AS'+i).value(),
         ruk_F: workbook.sheet("students").cell('M'+i).value(),
         ruk_IO: workbook.sheet("students").cell('N'+i).value(),
-        ruk_F_RP: workbook.sheet("students").cell('P'+i).value()
+        ruk_F_RP: workbook.sheet("students").cell('P'+i).value(),
+        secretar: workbook.sheet("students").cell('AU'+i).value()
       }
       var row = {};
       row["name_IP"]=students[i-2].name_IP;
@@ -45,8 +48,8 @@ $("#file-input").on('change', (e) => {
       row["ruk_F"]=students[i-2].ruk_F;
       row["letter"]=students[i-2].letter;
       row["recenzent"]=students[i-2].recenzent;
+      row["secretar"]=students[i-2].secretar;
       row["date"]=students[i-2].date;
-      row["mark"]=students[i-2].mark;
       data[i-2] = row;
       //console.log(students[i-2].mark)
      //console.log(data)
@@ -66,24 +69,25 @@ $("#file-input").on('change', (e) => {
   {   
       source: dataAdapter,
       theme: 'energyblue',      
-      width: 1300,
+      width: '100%',
+      height: '100%',
       sortable: true,
       filterable: true,
-      autoheight: true,
+      showfilterrow: true,
+      //autoheight: true,
       selectionmode: 'multiplerows',
       
       //pageable: true,
       //selectionmode: 'checkbox',
       columns: [
         { text: 'ФИО', datafield: 'name_IP', width: 200 },
-        { text: 'Номер спец.', datafield: 'spec_numb', width: 100 },
+        { text: 'Номер спец.', datafield: 'spec_numb', width: 80 },
         { text: 'Назв. спец.', datafield: 'spec_nazv', width: 200 },
-        { text: 'Тема диплома', datafield: 'tema', width: 250 },
-        { text: 'Оценка', datafield: 'letter', width: 50 },
-        { text: 'Руководитель', datafield: 'ruk_F', width: 150 },
-        { text: 'Рецензент', datafield: 'recenzent', width: 200 },
+        { text: 'Тема диплома', datafield: 'tema', width: 270 },
+        { text: 'Руководитель', datafield: 'ruk_F', width: 120 },
+        { text: 'Рецензент', datafield: 'recenzent', width: 140 },
+        { text: 'Секретарь', datafield: 'secretar', width: 140 },        
         { text: 'Дата сдачи', datafield: 'date', width: 100 },
-        { text: 'Оценка(цифра)', datafield: 'mark', width: 100 }
       ]
   });
   //var selectedStuds = [];
@@ -163,12 +167,21 @@ $("#file-input").on('change', (e) => {
 
 // });
 
-$("#sumbit-button").jqxButton({
+$("#submit_button").jqxButton({
   theme: 'energyblue',
-  height: 30
+  height: 40
 });
 
 
+$("#extract_button").jqxButton({
+  theme: 'energyblue',
+  height: 40
+});
+
+$("#selectAll").jqxToggleButton({
+  theme: 'energyblue',
+  height: 40
+});
 // $("#form").submit((e) => {
 //   e.preventDefault();
   
@@ -214,6 +227,8 @@ for (var m=0; m<rows.length; m++){
 //    callback(studs);
 //    return studs; // возвращается список студентов
   }
+
+////нажатие на кнопку сгенерировать протокол ВКР//////////////////
 $("#form").submit((e) => {
   e.preventDefault();
   
@@ -222,13 +237,38 @@ $("#form").submit((e) => {
   getChecked($("#form"), selectedRecords => {
   $.ajax({
     type: 'POST',
-    url: '/getWord',
+    url: '/getWordProtokol',
     data: JSON.stringify(selectedRecords),
     success: (data) => {
       data.forEach(e => window.open(e, '_blank'))
       }
     });
   });
+});
+
+$("#extract_button").click((e) => {
+  e.preventDefault();
+  
+  ///ЗАПРОС НА СЕРВЕР////////////////
+
+  getChecked($("#form"), selectedRecords => {
+  $.ajax({
+    type: 'POST',
+    url: '/getWordExtract',
+    data: JSON.stringify(selectedRecords),
+    success: (data) => {
+      data.forEach(e => window.open(e, '_blank'))
+      }
+    });
+  });
+});
+//var trigger = false;
+$("#selectAll").on('click', function () {
+  var toggled = $("#selectAll").jqxToggleButton('toggled');
+  if (toggled) {
+    $('#grid').jqxGrid('selectallrows');
+  }
+  else $("#grid").jqxGrid('clearselection');
 });
 
 // добавление чекбоксов/////////////////////////////////////////////
@@ -293,3 +333,4 @@ function addCheckbox(name) {
 //     ]
 // });
 // //});
+

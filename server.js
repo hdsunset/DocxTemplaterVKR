@@ -14,7 +14,9 @@ console.log(req.query)
   //тут можно удалять файл
 })
 
-app.post('/getWord', (req, res) => {
+
+//////ДЛЯ ПРОТОКОЛА ВКР////////////////////////////////////////////////////////////////////////
+app.post('/getWordProtokol', (req, res) => {
   let requests = JSON.parse(`[${Object.keys(req.body)[0]}]`)
   let ans = [];
   requests.forEach( (request, index) => {
@@ -40,9 +42,40 @@ app.post('/getWord', (req, res) => {
           }
         }
       });
-    })
-  })
-})
+    });
+  });
+});
+
+///////////////ДЛЯ ВЫПИСКИ////////////////////////////////////////////////////
+app.post('/getWordExtract', (req, res) => {
+  let requests = JSON.parse(`[${Object.keys(req.body)[0]}]`)
+  let ans = [];
+  requests.forEach( (request, index) => {
+    const options = {
+     template: {
+       filePath: 'protocol_extract.docx',
+       data: request
+     },
+     save: {
+       filePath: request.name_DP+'.docx'
+     }
+    }
+    let url = encodeURI(`https://ws3.morpher.ru/russian/declension?s=${request.name_IP}&format=json`);
+    requestJS(url, function(err, response, body) {
+      request.name_RP = JSON.parse(body).Р;
+      generateDocx(options, (error, message) => {
+        if (error) {
+          console.error(error)
+        } else {
+          ans.push('/download?file='+request.name_DP+'.docx')
+          if (ans.length === requests.length) {
+            res.send(ans);
+          }
+        }
+      });
+    });
+  });
+});
 
 // отображение HTML страницы
 app.get('/',  (req, res) => {

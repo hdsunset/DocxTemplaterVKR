@@ -2,6 +2,8 @@
   <head>
     <title>Simple Multer Upload Example</title>
     <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    
       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -23,13 +25,17 @@
     
   </head>
   <body>
-    <form id="form">
+    <form id="form"><h3>Генератор .docx-документов по заданному шаблону</h3>
       <input type="file" id="file-input" />
-      <div id="content"><h3>List of students</h3>
+      <div id="content">
         <ul id="list"></ul>
         <ul id="cblist"></ul>
       </div>
-      <input type="submit" id="sumbit-button" value="Сгенерировать протоколы ВКР"/>
+      <input type="button" id="selectAll" value="Выделить все/снять выделение"/>        
+      <input type="submit" id="submit_button" value="Сгенерировать протоколы ВКР"/>
+      <input type="button" id="extract_button" value="Сгенерировать выписки из протоколов ВКР"/>
+      
+      
     </form>
 
     <div id="grid">
