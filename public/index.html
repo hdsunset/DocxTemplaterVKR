@@ -25,22 +25,33 @@
     
   </head>
   <body>
-    <form id="form"><h3>Генератор .docx-документов по заданному шаблону</h3>
-      <input type="file" id="file-input" />
-      <div id="content">
-        <ul id="list"></ul>
-        <ul id="cblist"></ul>
+    <form id="form" method="post" enctype="multipart/form-data"><h3>Генератор docx и pdf документов по заданному шаблону</h3>
+      <div>
+      <label for="file-input">Выберите файл БД</label>
+      <input type="file" id="file-input" accept=".xls,.xlsx" label="выберите файл БД" />
+    </div>
+
+      Генерация Docx-документов 
+      <div id="docx">
+      <input type="submit" id="submit_button_docx" value="Сгенерировать протоколы ВКР"/>
+      <input type="button" id="extract_button_docx" value="Сгенерировать выписки из протоколов ВКР"/>
       </div>
-      <input type="button" id="selectAll" value="Выделить все/снять выделение"/>        
-      <input type="submit" id="submit_button" value="Сгенерировать протоколы ВКР"/>
-      <input type="button" id="extract_button" value="Сгенерировать выписки из протоколов ВКР"/>
-      
-      
+
+      Генерация PDF-документов
+      <div id="pdf">
+      <input type="submit" id="submit_button_pdf" value="Сгенерировать протоколы ВКР"/>
+      <input type="button" id="extract_button_pdf" value="Сгенерировать выписки из протоколов ВКР"/>
+      </div>
+
+      GRID-функционал
+      <div id="buttons">
+      <input type="button" id="selectAll" value="Выделить все/снять выделение"/>
+      <input type="button" id="deleterowbutton" value="Удалить выделенную строку"/>
+      </div>
     </form>
 
     <div id="grid">
     </div>
-    <div id="jqxgrid"></div>       
         
     </div>
 

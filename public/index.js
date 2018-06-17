@@ -73,7 +73,7 @@ $("#file-input").on('change', (e) => {
       height: '100%',
       sortable: true,
       filterable: true,
-      showfilterrow: true,
+      //showfilterrow: true,
       //autoheight: true,
       selectionmode: 'multiplerows',
       
@@ -81,9 +81,9 @@ $("#file-input").on('change', (e) => {
       //selectionmode: 'checkbox',
       columns: [
         { text: 'ФИО', datafield: 'name_IP', width: 200 },
+        { text: 'Тема диплома', datafield: 'tema', width: 270 },        
         { text: 'Номер спец.', datafield: 'spec_numb', width: 80 },
         { text: 'Назв. спец.', datafield: 'spec_nazv', width: 200 },
-        { text: 'Тема диплома', datafield: 'tema', width: 270 },
         { text: 'Руководитель', datafield: 'ruk_F', width: 120 },
         { text: 'Рецензент', datafield: 'recenzent', width: 140 },
         { text: 'Секретарь', datafield: 'secretar', width: 140 },        
@@ -167,18 +167,34 @@ $("#file-input").on('change', (e) => {
 
 // });
 
-$("#submit_button").jqxButton({
+$("#submit_button_docx").jqxButton({
   theme: 'energyblue',
   height: 40
 });
 
 
-$("#extract_button").jqxButton({
+$("#extract_button_docx").jqxButton({
+  theme: 'energyblue',
+  height: 40
+});
+
+$("#submit_button_pdf").jqxButton({
+  theme: 'energyblue',
+  height: 40
+});
+
+
+$("#extract_button_pdf").jqxButton({
   theme: 'energyblue',
   height: 40
 });
 
 $("#selectAll").jqxToggleButton({
+  theme: 'energyblue',
+  height: 40
+});
+
+$("#deleterowbutton").jqxToggleButton({
   theme: 'energyblue',
   height: 40
 });
@@ -269,6 +285,16 @@ $("#selectAll").on('click', function () {
     $('#grid').jqxGrid('selectallrows');
   }
   else $("#grid").jqxGrid('clearselection');
+});
+
+  // delete row.
+$("#deleterowbutton").on('click', function () {
+    var selectedrowindex = $("#grid").jqxGrid('getselectedrowindex');
+    var rowscount = $("#grid").jqxGrid('getdatainformation').rowscount;
+    if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+        var id = $("#grid").jqxGrid('getrowid', selectedrowindex);
+        var commit = $("#grid").jqxGrid('deleterow', id);
+    }
 });
 
 // добавление чекбоксов/////////////////////////////////////////////

@@ -12,6 +12,7 @@ app.get('/download', (req, res) => {
 console.log(req.query)
   res.download(__dirname+'/'+req.query.file)
   //тут можно удалять файл
+  //console.log("file uploaded");
 })
 
 
@@ -39,6 +40,7 @@ app.post('/getWordProtokol', (req, res) => {
           ans.push('/download?file='+request.name_DP+'.docx')
           if (ans.length === requests.length) {
             res.send(ans);
+            console.log('hello'+ans);
           }
         }
       });
