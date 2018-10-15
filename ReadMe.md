@@ -8,4 +8,5 @@ This command will install all npm references (node modules). When install will f
 **node server**
 You started your local server to run this API. Now go to http://localhost:3000/. 
 ***
+# Usage
 In this page you can chose the Excel-file and then you could chose the following rows to generate the VKR-documents.
