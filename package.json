@@ -36,6 +36,9 @@
     "xml-parser": "^1.2.1"
   },
   "devDependencies": {
+    "assert": "^1.4.1",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^6.0.0",
     "wdio-mocha-framework": "^0.5.13",
     "webpack": "^4.2.0",
     "webpack-cli": "^2.0.12",

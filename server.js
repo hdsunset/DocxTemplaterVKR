@@ -7,12 +7,14 @@ const body_parser = require('body-parser');
 app.use(body_parser.urlencoded({extended: true}))
 const generateDocx = require('generate-docx');
 const requestJS = require('request');
+const JSZip = require('jszip');
+const fs = require('fs');
 
 app.get('/download', (req, res) => {
 console.log(req.query)
   res.download(__dirname+'/'+req.query.file)
   //тут можно удалять файл
-  //console.log("file uploaded");
+  console.log("file uploaded");
 })
 
 
@@ -39,8 +41,18 @@ app.post('/getWordProtokol', (req, res) => {
         } else {
           ans.push('/download?file='+request.name_DP+'.docx')
           if (ans.length === requests.length) {
-            res.send(ans);
-            console.log('hello'+ans);
+            if (ans.length <= 2) res.send(ans);
+            else {
+              let zip = new JSZip();
+              for (var i = 0; i < requests.length; i++){
+                zip.file(requests[i].name_DP+'.docx', fs.readFileSync(__dirname+'/'+requests[i].name_DP+'.docx'))
+              }
+              zip.generateAsync({type : "uint8array"}).then((result => {
+                fs.writeFileSync("Archive_studs.zip", result)
+                ans = ['/download?file=Archive_studs.zip']
+                res.send(ans);
+              }))
+            }
           }
         }
       });
@@ -71,7 +83,18 @@ app.post('/getWordExtract', (req, res) => {
         } else {
           ans.push('/download?file='+request.name_DP+'.docx')
           if (ans.length === requests.length) {
-            res.send(ans);
+            if (ans.length <= 2) res.send(ans);
+            else {
+              let zip = new JSZip();
+              for (var i = 0; i < requests.length; i++){
+                zip.file(requests[i].name_DP+'.docx', fs.readFileSync(__dirname+'/'+requests[i].name_DP+'.docx'))
+              }
+              zip.generateAsync({type : "uint8array"}).then((result => {
+                fs.writeFileSync("Arc.zip", result)
+                ans = ['/download?file=Arc.zip']
+                res.send(ans);
+              }))
+            }
           }
         }
       });
