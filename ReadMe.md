@@ -9,4 +9,5 @@ This command will install all npm references (node modules). When install will f
 You started your local server to run this API. Now go to http://localhost:3000/. 
 ***
 # Usage
-In this page you can chose the Excel-file and then you could chose the following rows to generate the VKR-documents.
+In this page you can chose the Excel-file and then you could chose the following rows to generate the VKR-documents. In this GRID table you could do anything you want to display the range off students you want to print.
+If you'll chose 3-more documents it will be uploaded by an archive.
